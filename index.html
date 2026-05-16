@@ -1,973 +1,1066 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Runway CFO — AI-Powered Fractional CFO for Startups</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
---navy: #0f1729;
---navy-mid: #1a2540;
---gold: #c8a96e;
---gold-light: #e2c990;
---white: #f8f6f1;
---gray: #8a8f9e;
---light-bg: #f4f2ed;
---border: rgba(200,169,110,0.2);
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-font-family: ‘DM Sans’, sans-serif;
-background: var(--navy);
-color: var(--white);
-overflow-x: hidden;
-}
-
-/* NAV */
-nav {
-position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-display: flex; justify-content: space-between; align-items: center;
-padding: 1.5rem 4rem;
-background: rgba(15,23,41,0.9);
-backdrop-filter: blur(12px);
-border-bottom: 1px solid var(--border);
-}
-
-.nav-logo {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.5rem;
-font-weight: 600;
-color: var(--white);
-letter-spacing: 0.05em;
-}
-
-.nav-logo span { color: var(--gold); }
-
-.nav-links {
-display: flex; gap: 2.5rem; align-items: center;
-list-style: none;
-}
-
-.nav-links a {
-color: var(--gray);
-text-decoration: none;
-font-size: 0.875rem;
-font-weight: 400;
-letter-spacing: 0.05em;
-transition: color 0.3s;
-}
-
-.nav-links a:hover { color: var(--white); }
-
-.nav-cta {
-background: transparent;
-border: 1px solid var(--gold);
-color: var(--gold) !important;
-padding: 0.6rem 1.5rem;
-border-radius: 2px;
-transition: all 0.3s !important;
-}
-
-.nav-cta:hover {
-background: var(--gold) !important;
-color: var(--navy) !important;
-}
-
-/* HERO */
-.hero {
-min-height: 100vh;
-display: flex; align-items: center;
-padding: 8rem 4rem 4rem;
-position: relative;
-overflow: hidden;
-}
-
-.hero::before {
-content: ‘’;
-position: absolute; inset: 0;
-background: radial-gradient(ellipse at 70% 50%, rgba(200,169,110,0.06) 0%, transparent 60%),
-radial-gradient(ellipse at 20% 80%, rgba(26,37,64,0.8) 0%, transparent 50%);
-}
-
-.hero-grid {
-position: absolute; inset: 0; opacity: 0.03;
-background-image: linear-gradient(var(--gold) 1px, transparent 1px),
-linear-gradient(90deg, var(--gold) 1px, transparent 1px);
-background-size: 60px 60px;
-}
-
-.hero-content {
-position: relative; z-index: 1;
-max-width: 720px;
-}
-
-.hero-eyebrow {
-font-size: 0.75rem;
-font-weight: 500;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(--gold);
-margin-bottom: 1.5rem;
-display: flex; align-items: center; gap: 1rem;
-}
-
-.hero-eyebrow::before {
-content: ‘’;
-width: 40px; height: 1px;
-background: var(--gold);
-}
-
-.hero-title {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: clamp(3rem, 6vw, 5.5rem);
-font-weight: 300;
-line-height: 1.05;
-margin-bottom: 1.5rem;
-letter-spacing: -0.02em;
-}
-
-.hero-title em {
-font-style: italic;
-color: var(--gold);
-}
-
-.hero-subtitle {
-font-size: 1.1rem;
-color: var(--gray);
-line-height: 1.7;
-max-width: 560px;
-margin-bottom: 3rem;
-font-weight: 300;
-}
-
-.hero-actions {
-display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;
-}
-
-.btn-primary {
-background: var(--gold);
-color: var(--navy);
-padding: 1rem 2.5rem;
-border: none; border-radius: 2px;
-font-family: ‘DM Sans’, sans-serif;
-font-size: 0.875rem;
-font-weight: 500;
-letter-spacing: 0.05em;
-cursor: pointer;
-text-decoration: none;
-display: inline-block;
-transition: all 0.3s;
-}
-
-.btn-primary:hover {
-background: var(--gold-light);
-transform: translateY(-1px);
-}
-
-.btn-secondary {
-color: var(--white);
-text-decoration: none;
-font-size: 0.875rem;
-font-weight: 400;
-letter-spacing: 0.05em;
-display: flex; align-items: center; gap: 0.5rem;
-transition: color 0.3s;
-}
-
-.btn-secondary:hover { color: var(--gold); }
-
-.btn-secondary::after {
-content: ‘→’;
-transition: transform 0.3s;
-}
-
-.btn-secondary:hover::after { transform: translateX(4px); }
-
-.hero-stats {
-position: absolute;
-right: 4rem; bottom: 4rem;
-display: flex; gap: 3rem;
-}
-
-.stat {
-text-align: right;
-}
-
-.stat-number {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 2.5rem;
-font-weight: 600;
-color: var(--gold);
-line-height: 1;
-}
-
-.stat-label {
-font-size: 0.75rem;
-color: var(--gray);
-letter-spacing: 0.1em;
-text-transform: uppercase;
-margin-top: 0.25rem;
-}
-
-/* CREDENTIAL BAND */
-.credential-band {
-background: var(--navy-mid);
-border-top: 1px solid var(--border);
-border-bottom: 1px solid var(--border);
-padding: 2rem 4rem;
-display: flex; align-items: center; gap: 1rem;
-}
-
-.credential-band p {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.1rem;
-font-style: italic;
-color: var(--gray);
-line-height: 1.6;
-}
-
-.credential-band strong {
-color: var(--white);
-font-style: normal;
-}
-
-.credential-divider {
-width: 1px; height: 40px;
-background: var(--border);
-flex-shrink: 0;
-}
-
-/* SECTIONS */
-section { padding: 6rem 4rem; }
-
-.section-eyebrow {
-font-size: 0.75rem;
-font-weight: 500;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(--gold);
-margin-bottom: 1rem;
-display: flex; align-items: center; gap: 1rem;
-}
-
-.section-eyebrow::before {
-content: ‘’;
-width: 30px; height: 1px;
-background: var(--gold);
-}
-
-.section-title {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: clamp(2rem, 4vw, 3.5rem);
-font-weight: 300;
-line-height: 1.1;
-margin-bottom: 1.5rem;
-}
-
-.section-title em { font-style: italic; color: var(--gold); }
-
-.section-body {
-font-size: 1rem;
-color: var(--gray);
-line-height: 1.8;
-max-width: 560px;
-font-weight: 300;
-}
-
-/* PROBLEM SECTION */
-.problem {
-background: var(--light-bg);
-color: var(--navy);
-}
-
-.problem .section-title { color: var(--navy); }
-.problem .section-body { color: #4a5568; }
-.problem .section-eyebrow { color: var(--gold); }
-.problem .section-eyebrow::before { background: var(--gold); }
-
-.problem-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 4rem;
-align-items: center;
-margin-top: 4rem;
-}
-
-.problem-points {
-display: flex; flex-direction: column; gap: 1.5rem;
-}
-
-.problem-point {
-display: flex; gap: 1rem; align-items: flex-start;
-}
-
-.problem-point-icon {
-width: 32px; height: 32px;
-border: 1px solid rgba(200,169,110,0.4);
-border-radius: 2px;
-display: flex; align-items: center; justify-content: center;
-flex-shrink: 0;
-color: var(--gold);
-font-size: 0.875rem;
-}
-
-.problem-point-text strong {
-display: block;
-font-size: 0.95rem;
-font-weight: 500;
-color: var(--navy);
-margin-bottom: 0.25rem;
-}
-
-.problem-point-text p {
-font-size: 0.875rem;
-color: #6b7280;
-line-height: 1.6;
-}
-
-.problem-quote {
-background: var(--navy);
-padding: 3rem;
-border-left: 3px solid var(--gold);
-}
-
-.problem-quote blockquote {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.5rem;
-font-style: italic;
-color: var(--white);
-line-height: 1.5;
-margin-bottom: 1.5rem;
-}
-
-.problem-quote cite {
-font-size: 0.8rem;
-color: var(--gold);
-letter-spacing: 0.1em;
-text-transform: uppercase;
-font-style: normal;
-}
-
-/* SERVICES */
-.services-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 2px;
-margin-top: 4rem;
-}
-
-.service-card {
-background: var(--navy-mid);
-padding: 3rem 2.5rem;
-border: 1px solid var(--border);
-position: relative;
-transition: all 0.3s;
-}
-
-.service-card:hover {
-background: rgba(200,169,110,0.05);
-border-color: var(--gold);
-}
-
-.service-card.featured {
-background: rgba(200,169,110,0.08);
-border-color: var(--gold);
-}
-
-.service-tag {
-font-size: 0.7rem;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(--gold);
-margin-bottom: 1.5rem;
-}
-
-.service-price {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 3rem;
-font-weight: 600;
-color: var(--white);
-line-height: 1;
-margin-bottom: 0.5rem;
-}
-
-.service-price-note {
-font-size: 0.8rem;
-color: var(--gray);
-margin-bottom: 1.5rem;
-}
-
-.service-name {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.4rem;
-font-weight: 400;
-margin-bottom: 1rem;
-color: var(--white);
-}
-
-.service-desc {
-font-size: 0.875rem;
-color: var(--gray);
-line-height: 1.7;
-margin-bottom: 2rem;
-}
-
-.service-features {
-list-style: none;
-display: flex; flex-direction: column; gap: 0.75rem;
-}
-
-.service-features li {
-font-size: 0.825rem;
-color: var(--gray);
-display: flex; align-items: flex-start; gap: 0.75rem;
-line-height: 1.5;
-}
-
-.service-features li::before {
-content: ‘—’;
-color: var(--gold);
-flex-shrink: 0;
-}
-
-/* ABOUT */
-.about {
-background: var(--navy-mid);
-}
-
-.about-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 6rem;
-align-items: center;
-margin-top: 4rem;
-}
-
-.about-credential {
-background: var(--navy);
-border: 1px solid var(--border);
-padding: 2rem;
-margin-top: 2rem;
-}
-
-.about-credential-title {
-font-size: 0.75rem;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(--gold);
-margin-bottom: 0.75rem;
-}
-
-.about-credential-text {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.1rem;
-color: var(--white);
-line-height: 1.6;
-font-style: italic;
-}
-
-.about-metrics {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 2px;
-}
-
-.about-metric {
-background: var(--navy);
-padding: 2rem;
-border: 1px solid var(--border);
-}h
-
-.about-metric-number {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 2.5rem;
-font-weight: 600;
-color: var(--gold);
-line-height: 1;
-margin-bottom: 0.5rem;
-}
-
-.about-metric-label {
-font-size: 0.8rem;
-color: var(--gray);
-line-height: 1.5;
-}
-
-/* PROCESS */
-.process-steps {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 0;
-margin-top: 4rem;
-position: relative;
-}
-
-.process-steps::before {
-content: ‘’;
-position: absolute;
-top: 2rem; left: 2rem; right: 2rem;
-height: 1px;
-background: var(--border);
-}
-
-.process-step {
-padding: 0 2rem 2rem;
-position: relative;
-}
-
-.process-step-number {
-width: 4rem; height: 4rem;
-border: 1px solid var(--border);
-background: var(--navy);
-display: flex; align-items: center; justify-content: center;
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.5rem;
-color: var(--gold);
-margin-bottom: 1.5rem;
-position: relative; z-index: 1;
-}
-
-.process-step-title {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.2rem;
-color: var(--white);
-margin-bottom: 0.75rem;
-}
-
-.process-step-desc {
-font-size: 0.825rem;
-color: var(--gray);
-line-height: 1.7;
-}
-
-/* GUARANTEE */
-.guarantee {
-background: var(--light-bg);
-color: var(--navy);
-}
-
-.guarantee-box {
-max-width: 800px;
-margin: 4rem auto 0;
-background: var(--navy);
-padding: 4rem;
-border-left: 4px solid var(--gold);
-text-align: center;
-}
-
-.guarantee-box blockquote {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.6rem;
-font-style: italic;
-color: var(--white);
-line-height: 1.5;
-margin-bottom: 2rem;
-}
-
-.guarantee-box cite {
-font-size: 0.8rem;
-color: var(--gold);
-letter-spacing: 0.15em;
-text-transform: uppercase;
-font-style: normal;
-}
-
-/* CTA */
-.cta-section {
-text-align: center;
-padding: 8rem 4rem;
-position: relative;
-overflow: hidden;
-}
-
-.cta-section::before {
-content: ‘’;
-position: absolute; inset: 0;
-background: radial-gradient(ellipse at center, rgba(200,169,110,0.08) 0%, transparent 70%);
-}
-
-.cta-section .section-eyebrow {
-justify-content: center;
-}
-
-.cta-section .section-eyebrow::before { display: none; }
-
-.cta-section .section-title {
-margin: 0 auto 1.5rem;
-}
-
-.cta-section .section-body {
-margin: 0 auto 3rem;
-text-align: center;
-}
-
-.cta-actions {
-display: flex; gap: 1.5rem;
-justify-content: center; align-items: center;
-flex-wrap: wrap;
-}
-
-.cta-divider {
-font-size: 0.8rem;
-color: var(--gray);
-}
-
-/* FOOTER */
-footer {
-background: var(--navy-mid);
-border-top: 1px solid var(--border);
-padding: 3rem 4rem;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
-.footer-logo {
-font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.25rem;
-color: var(--white);
-}
-
-.footer-logo span { color: var(--gold); }
-
-.footer-links {
-display: flex; gap: 2rem;
-list-style: none;
-}
-
-.footer-links a {
-font-size: 0.8rem;
-color: var(--gray);
-text-decoration: none;
-transition: color 0.3s;
-}
-
-.footer-links a:hover { color: var(--white); }
-
-.footer-copy {
-font-size: 0.75rem;
-color: var(--gray);
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(30px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-.hero-eyebrow { animation: fadeUp 0.8s ease forwards; }
-.hero-title { animation: fadeUp 0.8s 0.2s ease both; }
-.hero-subtitle { animation: fadeUp 0.8s 0.4s ease both; }
-.hero-actions { animation: fadeUp 0.8s 0.6s ease both; }
-.hero-stats { animation: fadeUp 0.8s 0.8s ease both; }
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-nav { padding: 1.5rem 2rem; }
-.nav-links { display: none; }
-section { padding: 4rem 2rem; }
-.hero { padding: 7rem 2rem 6rem; }
-.hero-stats { position: static; margin-top: 3rem; justify-content: flex-start; }
-.problem-grid { grid-template-columns: 1fr; gap: 2rem; }
-.services-grid { grid-template-columns: 1fr; }
-.about-grid { grid-template-columns: 1fr; gap: 3rem; }
-.process-steps { grid-template-columns: 1fr 1fr; }
-.process-steps::before { display: none; }
-footer { flex-direction: column; gap: 1.5rem; text-align: center; }
-.credential-band { padding: 2rem; flex-direction: column; }
-}
-</style>
-
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+  <meta name="theme-color" content="#080d1a"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Family Finance"/>
+  <title>Family Finance</title>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="apple-touch-icon" href="icons/icon-192.png"/>
+  <link rel="icon" type="image/png" href="icons/icon-192.png"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:#080d1a;overflow-x:hidden}
+    body{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+    #root{min-height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch}
+    button{-webkit-tap-highlight-color:transparent;user-select:none;font-family:inherit}
+    input,select,textarea{font-family:inherit}
+    input[type=number]::-webkit-inner-spin-button{opacity:1}
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  </style>
 </head>
 <body>
-
-<!-- NAV -->
-
-<nav>
-  <div class="nav-logo">Runway <span>CFO</span></div>
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="https://calendly.com/hello-runwaycfo/30min" target="_blank" class="nav-cta">Get Started</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">AI-Powered Fractional CFO</p>
-    <h1 class="hero-title">
-      CFO-level clarity<br>
-      for founders who<br>
-      <em>can't afford to guess.</em>
-    </h1>
-    <p class="hero-subtitle">
-      Institutional-grade financial sophistication — powered by AI, delivered fast, at a fraction of the cost of a full-time CFO hire.
-    </p>
-    <div class="hero-actions">
-      <a href="https://calendly.com/hello-runwaycfo/30min" target="_blank" class="btn-primary">Book a Discovery Call</a>
-      <a href="#services" class="btn-secondary">See our services</a>
-    </div>
+<div id="root">
+  <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#080d1a;color:#64748b;font-family:sans-serif;flex-direction:column;gap:10px">
+    <div style="font-size:36px">◎</div>
+    <div style="font-size:14px">Loading Family Finance...</div>
+    <div id="sync-status" style="font-size:11px;color:#475569;margin-top:4px"></div>
   </div>
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-number">5</div>
-      <div class="stat-label">Day delivery</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">10×</div>
-      <div class="stat-label">Less than full-time</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">4yr</div>
-      <div class="stat-label">Institutional experience</div>
-    </div>
-  </div>
-</section>
-
-<!-- CREDENTIAL BAND -->
-
-<div class="credential-band">
-  <p>
-    <strong>Andrew Kelley</strong> spent nearly 4 years as Director of Finance at Southeastern University — building an AI-powered Reality Model: a 10-year financial forecasting platform with live levers and KPIs.
-  </p>
-  <div class="credential-divider"></div>
-  <p>
-    That same institutional sophistication is now available to <strong>your startup</strong> — at a fraction of the cost.
-  </p>
 </div>
 
-<!-- PROBLEM -->
+<!-- React + htm (no Babel needed, loads fast) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.js"></script>
 
-<section class="problem" id="problem">
-  <div class="section-eyebrow">The Problem</div>
-  <h2 class="section-title">Most founders are flying<br><em>completely blind.</em></h2>
-  <p class="section-body">You raised money. You're building. You're hiring. But your burn rate is a guess, your runway is unclear, and your investors are starting to ask questions you can't answer.</p>
+<script>
+function setSyncStatus(msg, color) {
+  document.querySelectorAll('#sync-status').forEach(function(el){
+    el.textContent = msg; el.style.color = color || '#64748b';
+  });
+}
+window.storage = {
+  get:    async function(k)   { try{var v=localStorage.getItem(k);return v?{key:k,value:v}:null;}catch(e){return null;} },
+  set:    async function(k,v) { try{localStorage.setItem(k,String(v));return{key:k,value:v};}catch(e){return null;} },
+  delete: async function(k)   { try{localStorage.removeItem(k);return{key:k,deleted:true};}catch(e){return null;} }
+};
+</script>
 
-  <div class="problem-grid">
-    <div class="problem-points">
-      <div class="problem-point">
-        <div class="problem-point-icon">01</div>
-        <div class="problem-point-text">
-          <strong>No financial visibility</strong>
-          <p>You know cash in the bank. You don't know your real burn rate, your true runway, or whether your unit economics actually work.</p>
+<script>
+// ── App ───────────────────────────────────────────────────────────────────────
+(function() {
+  var html = htm.bind(React.createElement);
+  var useState    = React.useState;
+  var useEffect   = React.useEffect;
+  var useCallback = React.useCallback;
+
+  // ── Defaults ─────────────────────────────────────────────────────────────────
+  var DA = [
+    {id:"wf", name:"Wells Fargo", balance:3835, color:"#f59e0b", note:"Primary bank — both pays here"},
+  ];
+  var DB = [
+    {id:"groc", name:"Groceries",    budget:550, icon:"🛒", color:"#3d9970", spent:0},
+    {id:"dd",   name:"DoorDash",     budget:150, icon:"🚗", color:"#e74c3c", spent:0},
+    {id:"dine", name:"Dining out",   budget:200, icon:"🍽", color:"#e67e22", spent:0},
+    {id:"tgt",  name:"Target",       budget:250, icon:"🎯", color:"#c0392b", spent:0},
+    {id:"amzn", name:"Amazon",       budget:200, icon:"📦", color:"#f39c12", spent:0},
+    {id:"clth", name:"Clothing",     budget:75,  icon:"👗", color:"#9b59b6", spent:0},
+    {id:"gas",  name:"Gas/Fuel",     budget:182, icon:"⛽", color:"#1abc9c", spent:0},
+    {id:"med",  name:"Medical",      budget:132, icon:"💊", color:"#3498db", spent:0},
+    {id:"cln",  name:"Cleaning",     budget:150, icon:"🧹", color:"#64748b", spent:0},
+    {id:"ent",  name:"Entertainment",budget:100, icon:"🎲", color:"#8b5cf6", spent:0},
+    {id:"hom",  name:"Home/Hardware",budget:150, icon:"🔨", color:"#78716c", spent:0},
+  ];
+  var DBL = [
+    {id:1,  name:"YMCA",               cat:"Gym",        day:2,   amt:317,  auto:true,  paid:false},
+    {id:2,  name:"Ardent wk 1",        cat:"Childcare",  day:2,   amt:351,  auto:true,  paid:false, note:"Weekly billing"},
+    {id:3,  name:"AT&T",               cat:"Phone",      day:3,   amt:228,  auto:true,  paid:false},
+    {id:4,  name:"State Farm",         cat:"Insurance",  day:5,   amt:109,  auto:true,  paid:false},
+    {id:5,  name:"Bluff Park Elem",    cat:"School",     day:6,   amt:55,   auto:true,  paid:false},
+    {id:6,  name:"Citi (1st pull)",    cat:"Debt",       day:7,   amt:88,   auto:true,  paid:false},
+    {id:7,  name:"Alabama Power",      cat:"Electric",   day:8,   amt:237,  auto:true,  paid:false},
+    {id:8,  name:"LendingClub",        cat:"Debt",       day:8,   amt:581,  auto:true,  paid:false},
+    {id:9,  name:"Ardent wk 2",        cat:"Childcare",  day:8,   amt:351,  auto:true,  paid:false},
+    {id:10, name:"Mortgage — half 1",  cat:"Housing",    day:8,   amt:1962, auto:false, paid:false, note:"Pay manually after Progress lands May 8"},
+    {id:11, name:"Amex autopay",       cat:"Debt",       day:9,   amt:699,  auto:true,  paid:false},
+    {id:12, name:"Ally Car",           cat:"Car",        day:12,  amt:530,  auto:true,  paid:false},
+    {id:13, name:"Upgrade Loan",       cat:"Debt",       day:13,  amt:579,  auto:true,  paid:false},
+    {id:14, name:"Hyundai (HMF)",      cat:"Car",        day:13,  amt:665,  auto:true,  paid:false},
+    {id:15, name:"Ardent wk 3",        cat:"Childcare",  day:15,  amt:351,  auto:true,  paid:false},
+    {id:16, name:"Discover",           cat:"Debt",       day:15,  amt:103,  auto:true,  paid:false},
+    {id:17, name:"Water (BWW)",        cat:"Utilities",  day:15,  amt:57,   auto:true,  paid:false},
+    {id:18, name:"Mortgage — half 2",  cat:"Housing",    day:18,  amt:1961, auto:false, paid:false, note:"Pay manually after SEU lands May 18"},
+    {id:20, name:"Spire Gas",          cat:"Utilities",  day:22,  amt:91,   auto:true,  paid:false},
+    {id:21, name:"GEICO",              cat:"Insurance",  day:23,  amt:269,  auto:true,  paid:false},
+    {id:22, name:"Spectrum",           cat:"Internet",   day:24,  amt:89,   auto:true,  paid:false},
+    {id:23, name:"Ally Car (reg.)",    cat:"Car",        day:25,  amt:530,  auto:true,  paid:false},
+    {id:24, name:"Student Loans",      cat:"Debt",       day:25,  amt:187,  auto:true,  paid:false},
+    {id:25, name:"Citi (2nd pull)",    cat:"Debt",       day:27,  amt:88,   auto:true,  paid:false},
+    {id:26, name:"Cleaning (bi-weekly 1)", cat:"Home",  day:9,   amt:150, auto:false, paid:false, note:"Venmo $150 to Ashley (wife) — she pays cleaning service"},
+    {id:29, name:"Cleaning (bi-weekly 2)", cat:"Home",  day:23,  amt:150, auto:false, paid:false, note:"Venmo $150 to Ashley (wife) — she pays cleaning service"},
+    {id:30, name:"Lawn & turf service",    cat:"Home",  day:15,  amt:185, auto:false, paid:false, note:"Venmo $185 to Ashley (wife) — she pays lawn service"},
+    {id:27, name:"Emergency fund",     cat:"Savings",    day:null,amt:674,  auto:false, paid:false, note:"Transfer to savings — May goal"},
+    {id:28, name:"Wife's flight (ATL-TPA)", cat:"Travel",  day:22, amt:300,  auto:false, paid:false, note:"Wedding May 23 · book on Delta or Frontier"},
+  ];
+  var DI = [
+    {id:"seu1", name:"SEU Paycheck",          amt:3011, day:4,  note:"Already received ✓", received:true},
+    {id:"prog1",name:"Progress Residential",  amt:3398, day:8,  note:"Due May 8",           received:false},
+    {id:"seu2", name:"SEU Paycheck",          amt:3011, day:18, note:"Due May 18",           received:false},
+    {id:"prog2",name:"Progress Residential",  amt:3398, day:22, note:"Due May 22",           received:false},
+  ];
+  var DEBTS = [
+    {name:"Lowe's card",  balance:2000,  rate:26, min:53},
+    {name:"Discover",     balance:3000,  rate:22, min:103},
+    {name:"Citi",         balance:4000,  rate:20, min:175},
+    {name:"Amex",         balance:8000,  rate:24, min:160},
+    {name:"Upgrade",      balance:14000, rate:18, min:579},
+    {name:"LendingClub",  balance:10000, rate:14, min:581},
+    {name:"Student Loans",balance:15000, rate:6,  min:187},
+    {name:"Ally Car",     balance:15000, rate:6.5,min:530},
+    {name:"Hyundai",      balance:20000, rate:5,  min:665},
+  ];
+  var KEYS = {a:"ff:accounts4", b:"ff:budgets4", bl:"ff:bills4", i:"ff:income4", m:"ff:month4"};
+
+  async function ld(k, fb) {
+    try { var r=await window.storage.get(k); return r?JSON.parse(r.value):fb; } catch(e){return fb;}
+  }
+  async function sv(k, d) { try{await window.storage.set(k,JSON.stringify(d));}catch(e){} }
+
+  var fmt = function(n){ return "$"+Math.round(Math.abs(n)).toLocaleString(); };
+  var today = new Date();
+  var D = today.getDate();
+  var DIM = new Date(today.getFullYear(),today.getMonth()+1,0).getDate();
+  var MP = Math.round(D/DIM*100);
+  var MON = today.toLocaleString("default",{month:"long"})+" "+today.getFullYear();
+  function du(day){ if(!day)return null; var d=day-D; return d<0?d+DIM:d; }
+  function nid(arr){ return Math.max(0,...arr.map(function(x){return +(x.id)||0;}))+1; }
+
+  var iSt = {width:"100%",background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.12)",
+    borderRadius:8,color:"#e2e8f0",fontSize:13,padding:"7px 10px",fontFamily:"inherit",boxSizing:"border-box"};
+  var bSt = {background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.1)",
+    borderRadius:8,color:"#94a3b8",fontSize:11,padding:"5px 10px",cursor:"pointer",fontFamily:"inherit"};
+
+  function Crd({label,value,color,sub}) {
+    return html`<div style=${{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:11,padding:"11px 13px"}}>
+      <div style=${{fontSize:10,color:"#475569",marginBottom:3}}>${label}</div>
+      <div style=${{fontSize:19,fontWeight:700,color}}>${value}</div>
+      <div style=${{fontSize:10,color:"#334155",marginTop:2}}>${sub}</div>
+    </div>`;
+  }
+  function Hdr({label,color}) {
+    return html`<div style=${{fontSize:10,fontWeight:600,letterSpacing:1,textTransform:"uppercase",
+      color:color||"#3b82f6",marginBottom:7,marginTop:8}}>${label}</div>`;
+  }
+  function Alrt({color,msg}) {
+    var c=color==="red"?{bg:"rgba(239,68,68,0.08)",bd:"rgba(239,68,68,0.2)",tx:"#fca5a5"}
+      :color==="amber"?{bg:"rgba(251,191,36,0.08)",bd:"rgba(251,191,36,0.2)",tx:"#fde68a"}
+      :{bg:"rgba(59,130,246,0.07)",bd:"rgba(59,130,246,0.18)",tx:"#93c5fd"};
+    return html`<div style=${{background:c.bg,border:"1px solid "+c.bd,borderRadius:10,
+      padding:"9px 13px",marginBottom:10,fontSize:12,color:c.tx}}>${msg}</div>`;
+  }
+
+  // ── Account Chip — tap balance to edit inline ────────────────────────────────
+  function AccChip({a, onUpdate}) {
+    var [editing, setEditing] = useState(false);
+    var [val, setVal]         = useState(String(Math.round(a.balance)));
+    var [showDel, setShowDel] = useState(false);
+
+    var commit = function() {
+      var n = parseFloat(val);
+      if (!isNaN(n)) onUpdate(n);
+      setEditing(false);
+    };
+
+    if (editing) {
+      return html`<div style=${{display:"inline-flex",alignItems:"center",gap:4,
+        background:"rgba(59,130,246,0.15)",border:"1px solid #3b82f6",
+        borderRadius:20,padding:"3px 6px 3px 10px",fontSize:11}}>
+        <span style=${{width:6,height:6,borderRadius:"50%",background:a.color,display:"inline-block"}}/>
+        <span style=${{color:"#94a3b8"}}>${a.name.split(" ")[0]}</span>
+        <span style=${{color:"#64748b"}}>$</span>
+        <input type="number" value=${val} autoFocus
+          onChange=${function(e){setVal(e.target.value);}}
+          onBlur=${commit}
+          onKeyDown=${function(e){if(e.key==="Enter")commit();if(e.key==="Escape")setEditing(false);}}
+          style=${{width:72,background:"transparent",border:"none",color:"#e2e8f0",
+            fontSize:12,fontWeight:700,fontFamily:"inherit",outline:"none",textAlign:"right"}}/>
+        <button onClick=${commit}
+          style=${{background:"rgba(52,211,153,0.2)",border:"none",borderRadius:10,
+            color:"#34d399",fontSize:10,padding:"2px 6px",cursor:"pointer",fontFamily:"inherit"}}>✓</button>
+      </div>`;
+    }
+
+    return html`<div onClick=${function(){setEditing(true);setVal(String(Math.round(a.balance)));}}
+      style=${{display:"inline-flex",alignItems:"center",gap:5,
+        background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.1)",
+        borderRadius:20,padding:"3px 10px",fontSize:11,cursor:"pointer",
+        transition:"background 0.15s"}}
+      onMouseOver=${function(e){e.currentTarget.style.background="rgba(255,255,255,0.09)";}}
+      onMouseOut=${function(e){e.currentTarget.style.background="rgba(255,255,255,0.05);";}}>
+      <span style=${{width:6,height:6,borderRadius:"50%",background:a.color,display:"inline-block"}}/>
+      <span style=${{color:"#94a3b8"}}>${a.name.split(" ")[0]}</span>
+      <span style=${{color:"#e2e8f0",fontWeight:600}}>${fmt(a.balance)}</span>
+      <span style=${{color:"#334155",fontSize:9}}>✎</span>
+    </div>`;
+  }
+
+  // ── Main App ──────────────────────────────────────────────────────────────────
+  function App() {
+    var [tab,setTab]       = useState("cashflow");
+    var [accs,setAccs]     = useState(null);
+    var [buds,setBuds]     = useState(null);
+    var [bills,setBills]   = useState(null);
+    var [inc,setInc]       = useState(null);
+    var [ready,setReady]   = useState(false);
+    var [expD,setExpD]     = useState(null);
+    var [showExp,setShowExp]     = useState(false);
+    var [refreshing,setRefreshing]   = useState(false);
+    var [showSettings,setShowSettings] = useState(false);
+    var [showReset,setShowReset] = useState(false);
+    var [newMonthAlert,setNewMonthAlert] = useState(false);
+
+    var curMonthKey = today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0");
+
+    useEffect(function(){
+      Promise.all([ld(KEYS.a,DA),ld(KEYS.b,DB),ld(KEYS.bl,DBL),ld(KEYS.i,DI),ld(KEYS.m,null)])
+        .then(function(r){
+          setAccs(r[0]); setBuds(r[1]);
+          // Clean up carryover flags from previous month resets
+          var cleanBills = (r[2]||[]).map(function(b){
+            if (b.note && b.note.indexOf('⚠ Unpaid from') !== -1) {
+              var cleaned = b.note.replace(/⚠ Unpaid from [^·]+(· )?/,'').trim();
+              return Object.assign({},b,{note:cleaned||undefined});
+            }
+            return b;
+          });
+          setBills(cleanBills); setInc(r[3]);
+          // Check if month has changed since last use
+          var storedMonth = r[4] ? r[4].key ? null : r[4] : null;
+          if (storedMonth && storedMonth !== curMonthKey) {
+            setNewMonthAlert(true);
+          }
+          setReady(true);
+        });
+    },[]);
+
+    var doReset = function(saveHistory) {
+      // Archive current month data first
+      if (saveHistory) {
+        var archive = {month:curMonthKey, budgets:buds, bills:bills, income:inc, archived:new Date().toISOString()};
+        sv("ff:history:"+curMonthKey, archive);
+      }
+      // Smart reset:
+      // - Already paid bills → reset to unpaid for new month
+      // - Unpaid bills → keep as unpaid but add "⚠ Unpaid from last month" note
+      var prevMonth = today.toLocaleString("default",{month:"long"});
+      var resetBills = bills.map(function(b){
+        if (b.paid) {
+          // Was paid last month — reset cleanly for new month
+          return Object.assign({},b,{paid:false, note: b.note ? b.note.replace(/⚠ Unpaid from .+/,'').trim() : undefined});
+        } else {
+          // Was NOT paid last month — flag it
+          var existingNote = (b.note||'').replace(/⚠ Unpaid from .+/,'').trim();
+          var newNote = ("⚠ Unpaid from "+prevMonth+(existingNote?" · "+existingNote:"")).trim();
+          return Object.assign({},b,{paid:false, note:newNote});
+        }
+      });
+      // Reset budget spent to 0
+      var resetBuds = buds.map(function(b){ return Object.assign({},b,{spent:0}); });
+      // Reset income received
+      var resetInc = inc.map(function(p){ return Object.assign({},p,{received:false}); });
+      // Save everything
+      sv(KEYS.bl, resetBills); setBills(resetBills);
+      sv(KEYS.b,  resetBuds);  setBuds(resetBuds);
+      sv(KEYS.i,  resetInc);   setInc(resetInc);
+      sv(KEYS.m,  curMonthKey);
+      setShowReset(false);
+      setNewMonthAlert(false);
+      var unpaidCount = bills.filter(function(b){return !b.paid;}).length;
+      if (unpaidCount > 0) {
+        showToast("✓ Started — "+unpaidCount+" bill(s) flagged from last month", "#fbbf24");
+      } else {
+        showToast("✓ New month started!", "#34d399");
+      }
+    };
+
+    var uA  = useCallback(function(fn){ setAccs(function(p){  var n=fn(p);sv(KEYS.a,n); return n;}); },[]);
+    var uB  = useCallback(function(fn){ setBuds(function(p){  var n=fn(p);sv(KEYS.b,n); return n;}); },[]);
+    var uBl = useCallback(function(fn){ setBills(function(p){ var n=fn(p);sv(KEYS.bl,n);return n;}); },[]);
+    var uI  = useCallback(function(fn){ setInc(function(p){   var n=fn(p);sv(KEYS.i,n); return n;}); },[]);
+
+    if (!ready) return html`<div style=${{display:"flex",alignItems:"center",justifyContent:"center",
+      minHeight:"100vh",background:"#080d1a",color:"#64748b",fontFamily:"sans-serif",
+      flexDirection:"column",gap:10}}>
+      <div style=${{fontSize:36}}>◎</div>
+      <div style=${{fontSize:14}}>Loading...</div>
+    </div>`;
+
+    var total = accs.reduce(function(s,a){return s+a.balance;},0);
+    var pend  = bills.filter(function(b){return !b.paid;}).reduce(function(s,b){return s+b.amt;},0);
+    var ipend = inc.filter(function(p){return !p.received;}).reduce(function(s,p){return s+p.amt;},0);
+    var proj  = total+ipend-pend;
+
+    var doRefresh = function(){
+      setRefreshing(true);
+      Promise.all([ld(KEYS.a,DA),ld(KEYS.b,DB),ld(KEYS.bl,DBL),ld(KEYS.i,DI)])
+        .then(function(r){
+          setAccs(r[0]);setBuds(r[1]);setBills(r[2]);setInc(r[3]);
+          setRefreshing(false);
+          showToast("✓ Synced with latest data", "#34d399");
+        })
+        .catch(function(){
+          setRefreshing(false);
+          showToast("● Could not reach server", "#f87171");
+        });
+    };
+
+    var doExport = function(){
+      var txt = JSON.stringify({exported:new Date().toLocaleString(),accounts:accs,budgets:buds,bills:bills,income:inc},null,2);
+      if (navigator.clipboard&&navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function(){alert("✓ Copied! Paste into Claude.");}).catch(function(){setShowExp(txt);});
+      } else { setShowExp(txt); }
+    };
+
+    return html`<div style=${{maxWidth:420,margin:"0 auto",minHeight:"100vh",background:"#080d1a",
+      color:"#e2e8f0",fontFamily:"'DM Sans','Segoe UI',sans-serif",paddingBottom:80}}>
+
+      <!-- Header -->
+      <div style=${{background:"linear-gradient(160deg,#0f172a 0%,#1a2744 100%)",
+        padding:"18px 18px 14px",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
+        <div style=${{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
+          <div>
+            <div style=${{fontSize:11,color:"#475569",letterSpacing:1,textTransform:"uppercase",marginBottom:3}}>
+              ${MON} · Day ${D}
+            </div>
+            <div style=${{display:"flex",alignItems:"center",gap:8}}>
+              <div style=${{fontSize:12,color:"#64748b"}}>Family Finance</div>
+              <div id="sync-status" style=${{fontSize:10,color:"#34d399"}}></div>
+            </div>
+          </div>
+          <div style=${{textAlign:"right"}}>
+            <div style=${{fontSize:10,color:"#475569",marginBottom:2}}>Total balance</div>
+            <div style=${{fontSize:22,fontWeight:700,
+              color:total<500?"#f87171":total<2000?"#fbbf24":"#34d399"}}>${fmt(total)}</div>
+          </div>
+        </div>
+        <div style=${{marginTop:10}}>
+          <div style=${{display:"flex",justifyContent:"space-between",fontSize:10,color:"#475569",marginBottom:3}}>
+            <span>${MP}% through ${today.toLocaleString("default",{month:"long"})}</span>
+            <span>${DIM-D} days left</span>
+          </div>
+          <div style=${{height:3,background:"rgba(255,255,255,0.07)",borderRadius:2}}>
+            <div style=${{height:"100%",width:MP+"%",background:"#3b82f6",borderRadius:2}}/>
+          </div>
+        </div>
+        <!-- Account chips — tap to edit balance -->
+        <div style=${{display:"flex",gap:6,flexWrap:"wrap",marginTop:10}}>
+          ${accs.map(function(a){
+            return html`<${AccChip} key=${a.id} a=${a} onUpdate=${function(newBal){
+              uA(function(p){ return p.map(function(x){ return x.id===a.id?Object.assign({},x,{balance:newBal}):x; }); });
+            }}/>`;
+          })}
+          <button onClick=${function(){
+            uA(function(p){ return [...p,{id:"a"+Date.now(),name:"New Account",balance:0,color:"#64748b",note:""}]; });
+          }} style=${{display:"inline-flex",alignItems:"center",gap:4,
+            background:"rgba(255,255,255,0.04)",border:"1px dashed rgba(255,255,255,0.15)",
+            borderRadius:20,padding:"3px 10px",fontSize:11,color:"#475569",cursor:"pointer"}}>
+            <span>+</span><span>Add</span>
+          </button>
         </div>
       </div>
-      <div class="problem-point">
-        <div class="problem-point-icon">02</div>
-        <div class="problem-point-text">
-          <strong>Investor reporting is painful</strong>
-          <p>Monthly updates take hours. Board packages take days. And you're never confident the numbers are right.</p>
+
+      <!-- Content -->
+      <div style=${{padding:"14px 14px 0"}}>
+        ${tab==="cashflow" && html`<${CashFlow} bills=${bills} buds=${buds} inc=${inc} pend=${pend} ipend=${ipend} proj=${proj} total=${total} uBl=${uBl} uI=${uI}/>`}
+        ${tab==="budget"   && html`<${Budget} buds=${buds} uB=${uB}/>`}
+        ${tab==="debt"     && html`<${DebtTab} expD=${expD} setExpD=${setExpD}/>`}
+        ${tab==="bills"    && html`<${BillsTab} bills=${bills} inc=${inc} uBl=${uBl} uI=${uI}/>`}
+      </div>
+
+      <!-- Bottom nav -->
+      <div style=${{position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",
+        width:"100%",maxWidth:420,background:"rgba(8,13,26,0.97)",backdropFilter:"blur(12px)",
+        borderTop:"1px solid rgba(255,255,255,0.07)",
+        display:"flex",justifyContent:"space-around",padding:"8px 0 14px",zIndex:100}}>
+        ${[{id:"cashflow",l:"Cash Flow",ic:"◎"},{id:"budget",l:"Budget",ic:"◈"},
+           {id:"debt",l:"Debt",ic:"◉"},{id:"bills",l:"Bills",ic:"◷"}].map(function(t){
+          return html`<button key=${t.id} onClick=${function(){setTab(t.id);}} style=${{
+            background:"none",border:"none",cursor:"pointer",flexDirection:"column",
+            display:"flex",alignItems:"center",gap:2,padding:"0 12px",
+            color:tab===t.id?"#3b82f6":"#334155"}}>
+            <span style=${{fontSize:18}}>${t.ic}</span>
+            <span style=${{fontSize:10,fontWeight:tab===t.id?600:400}}>${t.l}</span>
+          </button>`;
+        })}
+        <button onClick=${function(){setShowSettings(true);}} style=${{background:"none",border:"none",cursor:"pointer",
+          display:"flex",flexDirection:"column",alignItems:"center",gap:2,padding:"0 12px",
+          color:refreshing?"#3b82f6":"#334155",transition:"color 0.2s"}}>
+          <span style=${{fontSize:18,display:"inline-block",
+            animation:refreshing?"spin 0.8s linear infinite":"none"}}>⚙</span>
+          <span style=${{fontSize:10}}>More</span>
+        </button>
+      </div>
+
+      <!-- Export modal -->
+      ${newMonthAlert && html`<div style=${{position:"fixed",top:0,left:0,right:0,bottom:0,
+        background:"rgba(0,0,0,0.88)",zIndex:998,display:"flex",alignItems:"center",
+        justifyContent:"center",padding:20}}>
+        <div style=${{background:"#1a2744",borderRadius:16,padding:24,width:"100%",maxWidth:380,
+          border:"1px solid rgba(59,130,246,0.3)"}}>
+          <div style=${{fontSize:24,marginBottom:8}}>📅</div>
+          <div style=${{fontSize:16,fontWeight:700,marginBottom:8}}>New month detected!</div>
+          <div style=${{fontSize:13,color:"#94a3b8",marginBottom:12,lineHeight:1.5}}>
+            It looks like a new month has started. Would you like to reset for
+            <strong style=${{color:"#e2e8f0"}}> ${MON}</strong>?
+            Spending totals reset to $0, bills reset to unpaid, paychecks reset to pending.
+            Previous month saved automatically.
+          </div>
+          ${bills.filter(function(b){return !b.paid;}).length > 0 && html`<div style=${{
+            background:"rgba(251,191,36,0.1)",border:"1px solid rgba(251,191,36,0.25)",
+            borderRadius:8,padding:"10px 12px",marginBottom:12,fontSize:12}}>
+            <div style=${{color:"#fbbf24",fontWeight:600,marginBottom:4}}>
+              ⚠ ${bills.filter(function(b){return !b.paid;}).length} unpaid bill(s) will be flagged:
+            </div>
+            ${bills.filter(function(b){return !b.paid;}).map(function(b){
+              return html`<div key=${b.id} style=${{color:"#fde68a",fontSize:11,marginTop:2}}>
+                · ${b.name} — $${Math.round(b.amt).toLocaleString()}
+              </div>`;
+            })}
+          </div>`}
+          <div style=${{fontSize:12,color:"#475569",marginBottom:16}}>
+            Unpaid bills carry forward with a warning so nothing gets missed.
+          </div>
+          <div style=${{display:"flex",gap:8}}>
+            <button onClick=${function(){doReset(true);}}
+              style=${{flex:1,padding:"12px",borderRadius:10,border:"none",
+                background:"rgba(59,130,246,0.2)",color:"#93c5fd",fontSize:14,
+                cursor:"pointer",fontFamily:"inherit",fontWeight:600}}>
+              ✓ Start ${MON}
+            </button>
+            <button onClick=${function(){setNewMonthAlert(false);sv(KEYS.m,curMonthKey);}}
+              style=${{padding:"12px 16px",borderRadius:10,border:"1px solid rgba(255,255,255,0.1)",
+                background:"transparent",color:"#94a3b8",fontSize:13,cursor:"pointer",fontFamily:"inherit"}}>
+              Not yet
+            </button>
+          </div>
+        </div>
+      </div>`}
+
+      ${showReset && html`<div style=${{position:"fixed",top:0,left:0,right:0,bottom:0,
+        background:"rgba(0,0,0,0.88)",zIndex:998,display:"flex",alignItems:"center",
+        justifyContent:"center",padding:20}}>
+        <div style=${{background:"#1a2744",borderRadius:16,padding:24,width:"100%",maxWidth:380,
+          border:"1px solid rgba(255,255,255,0.1)"}}>
+          <div style=${{fontSize:24,marginBottom:8}}>↺</div>
+          <div style=${{fontSize:16,fontWeight:700,marginBottom:8}}>Start new month?</div>
+          <div style=${{fontSize:13,color:"#94a3b8",marginBottom:8,lineHeight:1.5}}>
+            This will reset for <strong style=${{color:"#e2e8f0"}}>${MON}</strong>:
+          </div>
+          <div style=${{fontSize:13,color:"#94a3b8",marginBottom:12,lineHeight:1.8}}>
+            ✓ Paid bills reset to unpaid for new month<br/>
+            ✓ Budget spending reset to $0<br/>
+            ✓ Paychecks marked as pending<br/>
+            ✓ Previous month archived
+          </div>
+          ${bills.filter(function(b){return !b.paid;}).length > 0 && html`<div style=${{
+            background:"rgba(251,191,36,0.1)",border:"1px solid rgba(251,191,36,0.25)",
+            borderRadius:8,padding:"10px 12px",marginBottom:16,fontSize:12}}>
+            <div style=${{color:"#fbbf24",fontWeight:600,marginBottom:4}}>
+              ⚠ ${bills.filter(function(b){return !b.paid;}).length} unpaid bill(s) from this month:
+            </div>
+            ${bills.filter(function(b){return !b.paid;}).map(function(b){
+              return html`<div key=${b.id} style=${{color:"#fde68a",fontSize:11,marginTop:2}}>
+                · ${b.name} — $${Math.round(b.amt).toLocaleString()}
+                ${!b.day?" (no fixed date)":"(day "+b.day+")"}
+              </div>`;
+            })}
+            <div style=${{color:"#94a3b8",fontSize:11,marginTop:6}}>
+              These will be flagged "⚠ Unpaid from last month" so you don't lose track.
+            </div>
+          </div>`}
+          <div style=${{display:"flex",gap:8}}>
+            <button onClick=${function(){doReset(true);}}
+              style=${{flex:1,padding:"12px",borderRadius:10,border:"none",
+                background:"rgba(52,211,153,0.2)",color:"#34d399",fontSize:14,
+                cursor:"pointer",fontFamily:"inherit",fontWeight:600}}>
+              Reset for ${MON}
+            </button>
+            <button onClick=${function(){setShowReset(false);}}
+              style=${{padding:"12px 16px",borderRadius:10,border:"1px solid rgba(255,255,255,0.1)",
+                background:"transparent",color:"#94a3b8",fontSize:13,cursor:"pointer",fontFamily:"inherit"}}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>`}
+
+      ${showSettings && html`<div style=${{position:"fixed",top:0,left:0,right:0,bottom:0,
+        background:"rgba(0,0,0,0.85)",zIndex:998,display:"flex",alignItems:"flex-end",
+        justifyContent:"center"}}>
+        <div style=${{background:"#111827",borderRadius:"16px 16px 0 0",padding:"20px 20px 36px",
+          width:"100%",maxWidth:420,border:"1px solid rgba(255,255,255,0.08)"}}>
+          <div style=${{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:20}}>
+            <div style=${{fontSize:15,fontWeight:700}}>Settings & Tools</div>
+            <button onClick=${function(){setShowSettings(false);}}
+              style=${{background:"rgba(255,255,255,0.08)",border:"none",borderRadius:20,
+                color:"#94a3b8",fontSize:13,padding:"4px 12px",cursor:"pointer",fontFamily:"inherit"}}>
+              Close
+            </button>
+          </div>
+
+          <!-- Sync -->
+          <button onClick=${function(){doRefresh();setShowSettings(false);}}
+            style=${{width:"100%",display:"flex",alignItems:"center",gap:14,
+              background:"rgba(59,130,246,0.08)",border:"1px solid rgba(59,130,246,0.2)",
+              borderRadius:12,padding:"14px 16px",marginBottom:10,cursor:"pointer",fontFamily:"inherit",
+              textAlign:"left"}}>
+            <span style=${{fontSize:24}}>⟳</span>
+            <div>
+              <div style=${{fontSize:14,fontWeight:600,color:"#93c5fd"}}>Sync now</div>
+              <div style=${{fontSize:12,color:"#475569"}}>Pull latest data from Firebase</div>
+            </div>
+          </button>
+
+          <!-- New month -->
+          <button onClick=${function(){setShowReset(true);setShowSettings(false);}}
+            style=${{width:"100%",display:"flex",alignItems:"center",gap:14,
+              background:"rgba(52,211,153,0.07)",border:"1px solid rgba(52,211,153,0.2)",
+              borderRadius:12,padding:"14px 16px",marginBottom:10,cursor:"pointer",fontFamily:"inherit",
+              textAlign:"left"}}>
+            <span style=${{fontSize:24}}>📅</span>
+            <div>
+              <div style=${{fontSize:14,fontWeight:600,color:"#34d399"}}>New month</div>
+              <div style=${{fontSize:12,color:"#475569"}}>Reset bills, budget & income for new month</div>
+            </div>
+          </button>
+
+          <!-- Export -->
+          <button onClick=${function(){doExport();setShowSettings(false);}}
+            style=${{width:"100%",display:"flex",alignItems:"center",gap:14,
+              background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.08)",
+              borderRadius:12,padding:"14px 16px",cursor:"pointer",fontFamily:"inherit",
+              textAlign:"left"}}>
+            <span style=${{fontSize:24}}>⬆</span>
+            <div>
+              <div style=${{fontSize:14,fontWeight:600,color:"#e2e8f0"}}>Export data</div>
+              <div style=${{fontSize:12,color:"#475569"}}>Copy all data to paste into Claude</div>
+            </div>
+          </button>
+        </div>
+      </div>`}
+
+      ${showExp && html`<div style=${{position:"fixed",top:0,left:0,right:0,bottom:0,
+        background:"rgba(0,0,0,0.85)",zIndex:999,display:"flex",alignItems:"center",
+        justifyContent:"center",padding:20}}>
+        <div style=${{background:"#1e2d40",borderRadius:16,padding:20,width:"100%",maxWidth:380,
+          maxHeight:"80vh",display:"flex",flexDirection:"column",gap:12}}>
+          <div style=${{fontSize:15,fontWeight:700}}>Export Data</div>
+          <div style=${{fontSize:12,color:"#94a3b8"}}>Copy and paste into Claude.</div>
+          <textarea readOnly value=${showExp} onFocus=${function(e){e.target.select();}}
+            style=${{flex:1,minHeight:180,background:"rgba(255,255,255,0.06)",
+              border:"1px solid rgba(255,255,255,0.12)",borderRadius:8,color:"#e2e8f0",
+              fontSize:10,padding:10,fontFamily:"monospace",resize:"none"}}/>
+          <div style=${{display:"flex",gap:8}}>
+            <button onClick=${function(){
+              var el=document.querySelector("textarea");el.select();document.execCommand("copy");
+              alert("✓ Copied!");
+            }} style=${{flex:1,padding:"10px",borderRadius:10,border:"none",
+              background:"rgba(52,211,153,0.2)",color:"#34d399",fontSize:13,
+              cursor:"pointer",fontFamily:"inherit",fontWeight:600}}>Copy All</button>
+            <button onClick=${function(){setShowExp(false);}}
+              style=${{padding:"10px 16px",borderRadius:10,border:"1px solid rgba(255,255,255,0.1)",
+                background:"transparent",color:"#94a3b8",fontSize:13,cursor:"pointer",fontFamily:"inherit"}}>
+              Close</button>
+          </div>
+        </div>
+      </div>`}
+    </div>`;
+  }
+
+
+  // ── Status Dashboard — quick month snapshot ──────────────────────────────────
+  function StatusDashboard({bills, buds, inc, proj, total}) {
+    var paidBills    = bills.filter(function(b){return b.paid;});
+    var pendingBills = bills.filter(function(b){return !b.paid;});
+    var paidAmt      = paidBills.reduce(function(s,b){return s+b.amt;},0);
+    var pendingAmt   = pendingBills.reduce(function(s,b){return s+b.amt;},0);
+    var totalBudget  = buds.reduce(function(s,b){return s+b.budget;},0);
+    var totalSpent   = buds.reduce(function(s,b){return s+b.spent;},0);
+    var overCats     = buds.filter(function(b){return b.spent>b.budget;});
+    var incReceived  = inc.filter(function(p){return p.received;}).reduce(function(s,p){return s+p.amt;},0);
+    var incPending   = inc.filter(function(p){return !p.received;}).reduce(function(s,p){return s+p.amt;},0);
+    var daysLeft     = DIM - D;
+    var pctMonth     = Math.round(D/DIM*100);
+    var pctBudget    = totalBudget>0?Math.round(totalSpent/totalBudget*100):0;
+    var onTrack      = pctBudget <= pctMonth + 5;
+
+    // Urgency: bills due in next 3 days
+    var urgent = pendingBills.filter(function(b){return b.day && du(b.day)>=0 && du(b.day)<=3;});
+
+    return html`<div style=${{marginBottom:14}}>
+      <!-- Month progress bar -->
+      <div style=${{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.07)",
+        borderRadius:12,padding:"12px 14px",marginBottom:8}}>
+        <div style=${{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
+          <span style=${{fontSize:12,fontWeight:600,color:"#e2e8f0"}}>${MON}</span>
+          <span style=${{fontSize:11,color:"#64748b"}}>Day ${D} of ${DIM} · ${daysLeft} days left</span>
+        </div>
+        <div style=${{height:4,background:"rgba(255,255,255,0.07)",borderRadius:2,marginBottom:10}}>
+          <div style=${{height:"100%",width:pctMonth+"%",background:"#3b82f6",borderRadius:2}}/>
+        </div>
+
+        <!-- 4 stat boxes -->
+        <div style=${{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:6}}>
+          <div style=${{textAlign:"center",padding:"8px 4px",background:"rgba(52,211,153,0.07)",borderRadius:8}}>
+            <div style=${{fontSize:14,fontWeight:700,color:"#34d399"}}>${fmt(incReceived)}</div>
+            <div style=${{fontSize:9,color:"#475569",marginTop:2}}>received</div>
+          </div>
+          <div style=${{textAlign:"center",padding:"8px 4px",background:"rgba(248,113,113,0.07)",borderRadius:8}}>
+            <div style=${{fontSize:14,fontWeight:700,color:"#f87171"}}>${fmt(pendingAmt)}</div>
+            <div style=${{fontSize:9,color:"#475569",marginTop:2}}>${pendingBills.length} bills left</div>
+          </div>
+          <div style=${{textAlign:"center",padding:"8px 4px",
+            background:onTrack?"rgba(52,211,153,0.07)":"rgba(251,191,36,0.07)",borderRadius:8}}>
+            <div style=${{fontSize:14,fontWeight:700,color:onTrack?"#34d399":"#fbbf24"}}>${pctBudget}%</div>
+            <div style=${{fontSize:9,color:"#475569",marginTop:2}}>of budget</div>
+          </div>
+          <div style=${{textAlign:"center",padding:"8px 4px",
+            background:proj>=0?"rgba(52,211,153,0.07)":"rgba(248,113,113,0.07)",borderRadius:8}}>
+            <div style=${{fontSize:14,fontWeight:700,color:proj>=0?"#34d399":"#f87171"}}>${fmt(proj)}</div>
+            <div style=${{fontSize:9,color:"#475569",marginTop:2}}>projected</div>
+          </div>
         </div>
       </div>
-      <div class="problem-point">
-        <div class="problem-point-icon">03</div>
-        <div class="problem-point-text">
-          <strong>Series A is coming</strong>
-          <p>Investors will ask for a clean data room, a working model, and 18 months of reconciled financials. Most founders aren't ready.</p>
+
+      <!-- Urgent bills -->
+      ${urgent.length>0 && html`<div style=${{background:"rgba(239,68,68,0.09)",
+        border:"1px solid rgba(239,68,68,0.25)",borderRadius:10,padding:"10px 13px",marginBottom:8}}>
+        <div style=${{fontSize:11,fontWeight:600,color:"#f87171",marginBottom:5}}>
+          ⚡ Due in the next 3 days
+        </div>
+        ${urgent.map(function(b){
+          var d = du(b.day);
+          return html`<div key=${b.id} style=${{display:"flex",justifyContent:"space-between",
+            alignItems:"center",marginBottom:3}}>
+            <span style=${{fontSize:12,color:"#fca5a5"}}>${b.name}</span>
+            <span style=${{fontSize:12,fontWeight:600,color:"#f87171"}}>
+              ${fmt(b.amt)} · ${d===0?"today":"in "+d+"d"}
+            </span>
+          </div>`;
+        })}
+      </div>`}
+
+      <!-- Over budget categories -->
+      ${overCats.length>0 && html`<div style=${{background:"rgba(251,191,36,0.08)",
+        border:"1px solid rgba(251,191,36,0.2)",borderRadius:10,padding:"10px 13px",marginBottom:8}}>
+        <div style=${{fontSize:11,fontWeight:600,color:"#fbbf24",marginBottom:5}}>
+          ⚠ Over budget (${overCats.length} ${overCats.length===1?"category":"categories"})
+        </div>
+        ${overCats.map(function(c){
+          var over = c.spent - c.budget;
+          return html`<div key=${c.id} style=${{display:"flex",justifyContent:"space-between",
+            alignItems:"center",marginBottom:3}}>
+            <span style=${{fontSize:12,color:"#fde68a"}}>${c.icon} ${c.name}</span>
+            <span style=${{fontSize:12,fontWeight:600,color:"#fbbf24"}}>
+              +${fmt(over)} over
+            </span>
+          </div>`;
+        })}
+      </div>`}
+
+      <!-- Bills paid progress -->
+      <div style=${{display:"flex",justifyContent:"space-between",alignItems:"center",
+        background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.07)",
+        borderRadius:10,padding:"10px 14px"}}>
+        <div>
+          <div style=${{fontSize:12,fontWeight:600,color:"#e2e8f0"}}>Bills paid</div>
+          <div style=${{fontSize:11,color:"#64748b",marginTop:1}}>
+            ${paidBills.length} of ${bills.length} · ${fmt(paidAmt)} paid
+          </div>
+        </div>
+        <div style=${{textAlign:"right"}}>
+          <div style=${{fontSize:20,fontWeight:700,color:"#34d399"}}>
+            ${Math.round(paidBills.length/Math.max(bills.length,1)*100)}%
+          </div>
+          <div style=${{fontSize:10,color:"#64748b"}}>complete</div>
         </div>
       </div>
-      <div class="problem-point">
-        <div class="problem-point-icon">04</div>
-        <div class="problem-point-text">
-          <strong>A full-time CFO isn't the answer</strong>
-          <p>$200,000 salary. Equity. Benefits. A 3-month hiring process. You don't need that. You need this.</p>
+    </div>`;
+  }
+
+  // ── Cash Flow ─────────────────────────────────────────────────────────────────
+  function CashFlow({bills,buds,inc,pend,ipend,proj,total,uBl,uI}) {
+    var pending  = bills.filter(function(b){return !b.paid;});
+    var paid     = bills.filter(function(b){return b.paid;});
+    var thisWeek = pending.filter(function(b){return b.day&&du(b.day)>=0&&du(b.day)<=6;})
+                         .sort(function(a,b){return du(a.day)-du(b.day);});
+    var later    = pending.filter(function(b){return b.day&&du(b.day)>6;})
+                         .sort(function(a,b){return du(a.day)-du(b.day);});
+    var variable = pending.filter(function(b){return !b.day;});
+    var tog = function(id){ uBl(function(p){return p.map(function(b){return b.id===id?Object.assign({},b,{paid:!b.paid}):b;});}); };
+    var togI = function(id){ uI(function(p){return p.map(function(x){return x.id===id?Object.assign({},x,{received:!x.received}):x;});}); };
+
+    return html`<div>
+      <${StatusDashboard} bills=${bills} buds=${buds} inc=${inc} proj=${proj} total=${total}/>
+      <div style=${{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:12}}>
+        <${Crd} label="Income pending" value=${fmt(ipend)} color="#34d399" sub="${inc.filter(function(p){return !p.received;}).length} paychecks"/>
+        <${Crd} label="Bills pending" value=${fmt(pend)} color="#f87171" sub="${pending.length} remaining"/>
+      </div>
+      <div style=${{display:"flex",justifyContent:"space-between",alignItems:"center",
+        background:proj<500?"rgba(239,68,68,0.09)":"rgba(52,211,153,0.07)",
+        border:"1px solid "+(proj<500?"rgba(239,68,68,0.2)":"rgba(52,211,153,0.15)"),
+        borderRadius:10,padding:"10px 14px",marginBottom:10}}>
+        <span style=${{fontSize:12,color:"#94a3b8"}}>Projected month-end</span>
+        <span style=${{fontSize:18,fontWeight:700,
+          color:proj<0?"#f87171":proj<500?"#fbbf24":"#34d399"}}>${fmt(proj)}</span>
+      </div>
+
+      <${Hdr} label="Paychecks"/>
+      ${inc.map(function(p){
+        return html`<div key=${p.id} style=${{display:"flex",justifyContent:"space-between",alignItems:"center",
+          padding:"10px 13px",marginBottom:6,
+          background:p.received?"rgba(52,211,153,0.03)":"rgba(52,211,153,0.07)",
+          border:"1px solid rgba(52,211,153,0.15)",borderRadius:10,
+          opacity:p.received?0.6:1}}>
+          <div style=${{flex:1}}>
+            <div style=${{fontSize:13,fontWeight:500,color:p.received?"#475569":"#a7f3d0",
+              textDecoration:p.received?"line-through":"none"}}>${p.name}</div>
+            <div style=${{fontSize:11,color:"#475569",marginTop:2}}>
+              Day ${p.day}
+              ${p.received
+                ? html`<span style=${{color:"#34d399",marginLeft:5}}>· Received ✓</span>`
+                : html`<span style=${{color:"#f59e0b",marginLeft:5}}>· ${p.note}</span>`}
+            </div>
+          </div>
+          <div style=${{display:"flex",alignItems:"center",gap:10,flexShrink:0}}>
+            <span style=${{fontSize:15,fontWeight:700,color:p.received?"#475569":"#34d399"}}>${fmt(p.amt)}</span>
+            <button onClick=${function(){togI(p.id);}} style=${{width:28,height:28,borderRadius:"50%",
+              border:"1.5px solid "+(p.received?"rgba(255,255,255,0.1)":"rgba(52,211,153,0.4)"),
+              cursor:"pointer",background:"transparent",fontSize:13,
+              color:p.received?"#334155":"#34d399"}}>${p.received?"↩":"✓"}</button>
+          </div>
+        </div>`;
+      })}
+
+      ${thisWeek.length>0 && html`<${Hdr} label="Due this week" color="#f87171"/>`}
+      ${thisWeek.map(function(b){ return html`<${BRow} key=${b.id} b=${b} onTog=${function(){tog(b.id);}}/>`; })}
+      ${later.length>0 && html`<${Hdr} label="Later this month"/>`}
+      ${later.map(function(b){ return html`<${BRow} key=${b.id} b=${b} onTog=${function(){tog(b.id);}}/>`; })}
+      ${variable.length>0 && html`<${Hdr} label="No fixed date"/>`}
+      ${variable.map(function(b){ return html`<${BRow} key=${b.id} b=${b} onTog=${function(){tog(b.id);}}/>`; })}
+
+      ${paid.length>0 && html`<${Hdr} label="Paid (${paid.length})" color="#334155"/>`}
+      ${paid.map(function(b){
+        return html`<div key=${b.id} onClick=${function(){tog(b.id);}}
+          style=${{display:"flex",justifyContent:"space-between",padding:"6px 12px",
+            marginBottom:3,opacity:0.4,cursor:"pointer"}}>
+          <span style=${{fontSize:12,color:"#475569",textDecoration:"line-through"}}>${b.name}</span>
+          <span style=${{fontSize:12,color:"#334155"}}>✓ ${fmt(b.amt)}</span>
+        </div>`;
+      })}
+    </div>`;
+  }
+
+  function BRow({b, onTog}) {
+    var d = b.day ? du(b.day) : null;
+    var urg = d!==null && d<=3;
+    return html`<div style=${{display:"flex",justifyContent:"space-between",alignItems:"center",
+      padding:"10px 13px",marginBottom:6,
+      background:urg?"rgba(239,68,68,0.08)":"rgba(255,255,255,0.03)",
+      border:"1px solid "+(urg?"rgba(239,68,68,0.2)":"rgba(255,255,255,0.07)"),borderRadius:10}}>
+      <div style=${{flex:1}}>
+        <div style=${{fontSize:13,fontWeight:500}}>${b.name}</div>
+        <div style=${{fontSize:11,color:"#475569",marginTop:2}}>
+          ${b.cat}
+          ${b.auto && html`<span style=${{color:"#34d399",marginLeft:5}}>✓ auto</span>`}
+          ${b.note && html`<span style=${{color:"#fbbf24",marginLeft:5}}>· ${b.note}</span>`}
         </div>
       </div>
-    </div>
-    <div class="problem-quote">
-      <blockquote>"Most founders can't answer one question in 30 seconds: what's your exact runway right now? Not approximate. Exact. If you can't — your financial infrastructure isn't where it needs to be."</blockquote>
-      <cite>— Andrew Kelley, Founder — Runway CFO</cite>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-
-<section id="services">
-  <div class="section-eyebrow">Services</div>
-  <h2 class="section-title">Three ways we<br><em>work together.</em></h2>
-  <p class="section-body">Every engagement starts with understanding exactly where you are — and building the financial infrastructure to get you where you're going.</p>
-
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-tag">Starter</div>
-      <div class="service-price">$3,000</div>
-      <div class="service-price-note">One-time engagement</div>
-      <div class="service-name">Financial Clarity Audit</div>
-      <p class="service-desc">A complete financial health assessment delivered in 5 business days. Know exactly where you stand.</p>
-      <ul class="service-features">
-        <li>Real burn rate calculation — from actuals, not estimates</li>
-        <li>True runway projection — months of cash remaining</li>
-        <li>Cash flow model with live levers</li>
-        <li>Top 3 financial risks identified</li>
-        <li>90-day action plan to fix them</li>
-        <li>Delivery call with Andrew personally</li>
-      </ul>
-    </div>
-
-
-<div class="service-card featured">
-  <div class="service-tag">Most Popular — Growth</div>
-  <div class="service-price">$4,000</div>
-  <div class="service-price-note">Per month, ongoing</div>
-  <div class="service-name">Fractional CFO Retainer</div>
-  <p class="service-desc">Ongoing CFO-level support. Monthly reporting, investor updates, cash flow forecasting — and a monthly call with Andrew.</p>
-  <ul class="service-features">
-    <li>Investor-ready dashboard — delivered by 5th of month</li>
-    <li>Monthly investor update — drafted and ready to send</li>
-    <li>Cash flow forecast — rolling 90-day projection</li>
-    <li>Budget vs actuals — every category explained</li>
-    <li>Monthly CFO call — 60 minutes with Andrew</li>
-    <li>Slack access for urgent questions</li>
-  </ul>
-</div>
-
-<div class="service-card">
-  <div class="service-tag">Scale</div>
-  <div class="service-price">$15,000</div>
-  <div class="service-price-note">90-day engagement</div>
-  <div class="service-name">Full Finance Ops Buildout</div>
-  <p class="service-desc">Complete financial infrastructure built from the ground up. Series A ready when we're done.</p>
-  <ul class="service-features">
-    <li>Clean books and reconciled financials</li>
-    <li>Reality Model — 3-year forecast with live levers</li>
-    <li>Complete data room built</li>
-    <li>Investor-ready reporting infrastructure</li>
-    <li>Financial controls and SOPs documented</li>
-    <li>Team trained on monthly close process</li>
-  </ul>
-</div>
-
-
-  </div>
-</section>
-
-<!-- ABOUT -->
-
-<section class="about" id="about">
-  <div class="section-eyebrow">About</div>
-  <h2 class="section-title">Built by someone who's<br><em>already done this.</em></h2>
-
-  <div class="about-grid">
-    <div>
-      <p class="section-body" style="max-width:100%; margin-bottom:1.5rem;">
-        I spent nearly 4 years as Director of Finance at Southeastern University. In that time I built something I've never seen anywhere else — a Reality Model. An AI-powered 10-year financial forecasting platform built in Excel and SQL, with live levers and KPIs.
-      </p>
-      <p class="section-body" style="max-width:100%; margin-bottom:1.5rem;">
-        Pull a lever — change a hire, change pricing, change burn — and see the 10-year financial impact instantly. That's CFO-level thinking at its highest form.
-      </p>
-      <p class="section-body" style="max-width:100%;">
-        When I looked at the startup world, I saw founders making those same high-stakes decisions completely blind. No model. No visibility. No support.
-      </p>
-      <div class="about-credential">
-        <div class="about-credential-title">The Runway CFO Promise</div>
-        <div class="about-credential-text">"Same institutional sophistication. Built for founders. Fraction of the cost."</div>
+      <div style=${{display:"flex",alignItems:"center",gap:10,flexShrink:0,marginLeft:8}}>
+        <div style=${{textAlign:"right"}}>
+          <div style=${{fontSize:14,fontWeight:600}}>${fmt(b.amt)}</div>
+          <div style=${{fontSize:11,color:urg?"#f87171":"#475569"}}>
+            ${!b.day?"variable":d===0?"today":"in "+d+"d"}
+          </div>
+        </div>
+        <button onClick=${onTog} style=${{width:28,height:28,borderRadius:"50%",
+          border:"1.5px solid rgba(52,211,153,0.3)",cursor:"pointer",
+          background:"transparent",fontSize:13,color:"#34d399",flexShrink:0}}>✓</button>
       </div>
-    </div>
-    <div class="about-metrics">
-      <div class="about-metric">
-        <div class="about-metric-number">4yr</div>
-        <div class="about-metric-label">Director of Finance — Southeastern University</div>
+    </div>`;
+  }
+
+  // ── Budget ────────────────────────────────────────────────────────────────────
+  function Budget({buds, uB}) {
+    var [eid,setEid] = useState(null);
+    var [adding,setAdding] = useState(false);
+    var total = buds.reduce(function(s,c){return s+c.budget;},0);
+    var spent = buds.reduce(function(s,c){return s+c.spent;},0);
+    var overN = buds.filter(function(c){return c.spent>c.budget;}).length;
+
+    return html`<div>
+      <div style=${{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:12}}>
+        <${Crd} label="Monthly budget" value=${fmt(total)} color="#64748b" sub="all categories"/>
+        <${Crd} label="Spent (${today.toLocaleString("default",{month:"short"})})" value=${fmt(spent)}
+          color=${spent>total?"#f87171":"#fbbf24"} sub="${overN} over budget"/>
       </div>
-      <div class="about-metric">
-        <div class="about-metric-number">10yr</div>
-        <div class="about-metric-label">Forecast horizon of the Reality Model</div>
+      ${overN>0 && html`<${Alrt} color="red" msg="${overN} categories over · ${fmt(spent-total)} total overage"/>`}
+
+      <div style=${{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8,marginTop:4}}>
+        <div style=${{fontSize:10,fontWeight:600,letterSpacing:1,textTransform:"uppercase",color:"#3b82f6"}}>Categories</div>
+        <button onClick=${function(){setAdding(true);}} style=${bSt}>+ Add</button>
       </div>
-      <div class="about-metric">
-        <div class="about-metric-number">AI</div>
-        <div class="about-metric-label">Powered delivery — faster and more accurate</div>
+
+      ${adding && html`<${CatEdit}
+        onSave=${function(c){uB(function(p){return [...p,Object.assign({},c,{id:"c"+Date.now()})];});setAdding(false);}}
+        onCancel=${function(){setAdding(false);}}/>`}
+
+      ${buds.map(function(cat){
+        var pct = cat.budget>0?cat.spent/cat.budget:0;
+        var over = cat.spent>cat.budget;
+        return html`<div key=${cat.id} style=${{background:"rgba(255,255,255,0.03)",
+          border:"1px solid rgba(255,255,255,0.07)",borderRadius:10,padding:"11px 13px",marginBottom:7}}>
+          ${eid===cat.id
+            ? html`<${CatEdit}
+                initial=${cat}
+                onSave=${function(u){uB(function(p){return p.map(function(c){return c.id===cat.id?Object.assign({},c,u):c;});});setEid(null);}}
+                onCancel=${function(){setEid(null);}}
+                onDelete=${function(){uB(function(p){return p.filter(function(c){return c.id!==cat.id;});});setEid(null);}}/>`
+            : html`<div>
+                <div style=${{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:7}}>
+                  <div style=${{display:"flex",alignItems:"center",gap:7}}>
+                    <span style=${{fontSize:16}}>${cat.icon}</span>
+                    <span style=${{fontSize:13,fontWeight:500}}>${cat.name}</span>
+                  </div>
+                  <div style=${{display:"flex",alignItems:"center",gap:8}}>
+                    <${SpendIn} value=${cat.spent} over=${over}
+                      onChange=${function(v){uB(function(p){return p.map(function(c){return c.id===cat.id?Object.assign({},c,{spent:v}):c;});});}}/>
+                    <span style=${{fontSize:11,color:"#475569"}}>/ ${fmt(cat.budget)}</span>
+                    <button onClick=${function(){setEid(cat.id);}} style=${bSt}>···</button>
+                  </div>
+                </div>
+                <div style=${{height:5,background:"rgba(255,255,255,0.06)",borderRadius:3}}>
+                  <div style=${{height:"100%",borderRadius:3,width:Math.min(pct,1)*100+"%",
+                    background:over?"#ef4444":pct>0.8?"#fbbf24":cat.color}}/>
+                </div>
+                <div style=${{display:"flex",justifyContent:"space-between",marginTop:4,fontSize:10,color:"#334155"}}>
+                  <span style=${{color:over?"#f87171":"#334155"}}>
+                    ${over?"Over "+fmt(cat.spent-cat.budget):fmt(cat.budget-cat.spent)+" left"}
+                  </span>
+                  <span>On-pace: ${fmt(Math.round(cat.budget*MP/100))}</span>
+                </div>
+              </div>`}
+        </div>`;
+      })}
+    </div>`;
+  }
+
+  function SpendIn({value, onChange, over}) {
+    var [ed,setEd] = useState(false);
+    var [v,setV]   = useState(String(Math.round(value)));
+    if (ed) return html`<input type="number" value=${v} autoFocus
+      onChange=${function(e){setV(e.target.value);}}
+      onBlur=${function(){onChange(parseFloat(v)||0);setEd(false);}}
+      onKeyDown=${function(e){if(e.key==="Enter"){onChange(parseFloat(v)||0);setEd(false);}}}
+      style=${{width:72,background:"rgba(255,255,255,0.08)",border:"1px solid #3b82f6",
+        borderRadius:6,color:over?"#f87171":"#e2e8f0",fontSize:13,padding:"2px 6px",textAlign:"right"}}/>`;
+    return html`<span onClick=${function(){setEd(true);setV(String(Math.round(value)));}}
+      style=${{fontSize:14,fontWeight:700,cursor:"pointer",
+        color:over?"#f87171":"#e2e8f0",borderBottom:"1px dashed rgba(255,255,255,0.15)"}}>
+      ${fmt(value)}</span>`;
+  }
+
+  function CatEdit({initial, onSave, onCancel, onDelete}) {
+    var [name,setName] = useState(initial?initial.name:"");
+    var [bud,setBud]   = useState(initial?String(initial.budget):"");
+    var [sp,setSp]     = useState(initial?String(initial.spent):"");
+    var [icon,setIcon] = useState(initial?initial.icon:"💰");
+    return html`<div style=${{background:"rgba(59,130,246,0.07)",border:"1px solid rgba(59,130,246,0.18)",
+      borderRadius:10,padding:"10px 12px",marginBottom:8}}>
+      <div style=${{display:"grid",gridTemplateColumns:"40px 1fr",gap:6,marginBottom:6}}>
+        <input value=${icon} onChange=${function(e){setIcon(e.target.value);}} placeholder="Icon"
+          style=${{...iSt,textAlign:"center",fontSize:18,padding:"4px"}}/>
+        <input value=${name} onChange=${function(e){setName(e.target.value);}} placeholder="Category name" style=${iSt}/>
       </div>
-      <div class="about-metric">
-        <div class="about-metric-number">5dy</div>
-        <div class="about-metric-label">Audit delivery — from intake to findings</div>
+      <div style=${{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,marginBottom:8}}>
+        <input value=${bud} onChange=${function(e){setBud(e.target.value);}} placeholder="Budget $" type="number" style=${iSt}/>
+        <input value=${sp}  onChange=${function(e){setSp(e.target.value);}}  placeholder="Spent $"  type="number" style=${iSt}/>
       </div>
-    </div>
-  </div>
-</section>
+      <div style=${{display:"flex",gap:6}}>
+        <button onClick=${function(){onSave({name,budget:parseFloat(bud)||0,spent:parseFloat(sp)||0,icon,color:"#64748b"});}}
+          style=${{...bSt,background:"rgba(52,211,153,0.15)",color:"#34d399",flex:1}}>Save</button>
+        <button onClick=${onCancel} style=${{...bSt,flex:1}}>Cancel</button>
+        ${onDelete && html`<button onClick=${onDelete}
+          style=${{...bSt,background:"rgba(239,68,68,0.12)",color:"#f87171"}}>Delete</button>`}
+      </div>
+    </div>`;
+  }
 
-<!-- PROCESS -->
+  // ── Bills Tab ─────────────────────────────────────────────────────────────────
+  function BillsTab({bills, inc, uBl, uI}) {
+    var [filter,setFilter] = useState("pending");
+    var [eid,setEid]       = useState(null);
+    var [addB,setAddB]     = useState(false);
+    var pAmt = bills.filter(function(b){return !b.paid;}).reduce(function(s,b){return s+b.amt;},0);
+    var dAmt = bills.filter(function(b){return  b.paid;}).reduce(function(s,b){return s+b.amt;},0);
+    var shown = filter==="all"?bills:filter==="pending"?bills.filter(function(b){return !b.paid;}):bills.filter(function(b){return b.paid;});
+    var tog = function(id){ uBl(function(p){return p.map(function(b){return b.id===id?Object.assign({},b,{paid:!b.paid}):b;}); }); };
+    var del = function(id){ uBl(function(p){return p.filter(function(b){return b.id!==id;}); }); };
+    var savB = function(b){
+      if (b.id && bills.find(function(x){return x.id===b.id;})) {
+        uBl(function(p){return p.map(function(x){return x.id===b.id?b:x;});});
+      } else {
+        uBl(function(p){return [...p,Object.assign({},b,{id:nid(p)})];});
+      }
+      setEid(null); setAddB(false);
+    };
 
-<section id="process">
-  <div class="section-eyebrow">Process</div>
-  <h2 class="section-title">From first conversation<br><em>to financial clarity.</em></h2>
+    return html`<div>
+      <div style=${{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:12}}>
+        <${Crd} label="Pending" value=${fmt(pAmt)} color="#f87171" sub="${bills.filter(function(b){return !b.paid;}).length} bills"/>
+        <${Crd} label="Paid"    value=${fmt(dAmt)} color="#34d399" sub="${bills.filter(function(b){return b.paid;}).length} bills"/>
+      </div>
+      <div style=${{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
+        <div style=${{display:"flex",gap:6}}>
+          ${["pending","paid","all"].map(function(v){
+            return html`<button key=${v} onClick=${function(){setFilter(v);}} style=${{
+              padding:"4px 12px",borderRadius:20,border:"1px solid",fontSize:11,cursor:"pointer",
+              background:filter===v?"rgba(59,130,246,0.18)":"transparent",
+              borderColor:filter===v?"#3b82f6":"rgba(255,255,255,0.1)",
+              color:filter===v?"#93c5fd":"#475569"}}>${v.charAt(0).toUpperCase()+v.slice(1)}</button>`;
+          })}
+        </div>
+        <button onClick=${function(){setAddB(true);}} style=${bSt}>+ Add</button>
+      </div>
 
-  <div class="process-steps">
-    <div class="process-step">
-      <div class="process-step-number">01</div>
-      <div class="process-step-title">Discovery Call</div>
-      <p class="process-step-desc">20 minutes with Andrew. We understand your stage, your pain points, and whether we're the right fit. No pressure. No pitch.</p>
-    </div>
-    <div class="process-step">
-      <div class="process-step-number">02</div>
-      <div class="process-step-title">Secure Intake</div>
-      <p class="process-step-desc">NDA signed. Secure Drive folder created. You share your financials — bank statements, QuickBooks, revenue data.</p>
-    </div>
-    <div class="process-step">
-      <div class="process-step-number">03</div>
-      <div class="process-step-title">Analysis & Build</div>
-      <p class="process-step-desc">Our AI-powered delivery engine analyzes your data. Andrew reviews everything. Nothing leaves our hands without passing QA.</p>
-    </div>
-    <div class="process-step">
-      <div class="process-step-number">04</div>
-      <div class="process-step-title">Delivery & Action</div>
-      <p class="process-step-desc">Findings delivered in 5 days. Walk-through call with Andrew. 90-day action plan. You know exactly what to do next.</p>
-    </div>
-  </div>
-</section>
+      ${addB && html`<${BillEdit} onSave=${savB} onCancel=${function(){setAddB(false);}}/>`}
 
-<!-- GUARANTEE -->
+      ${shown.sort(function(a,b){return (a.day||99)-(b.day||99);}).map(function(b){
+        var d = b.day?du(b.day):null;
+        return eid===b.id
+          ? html`<${BillEdit} key=${b.id} initial=${b} onSave=${savB}
+              onCancel=${function(){setEid(null);}}
+              onDelete=${function(){del(b.id);setEid(null);}}/>`
+          : html`<div key=${b.id} style=${{display:"flex",justifyContent:"space-between",alignItems:"center",
+              padding:"10px 13px",marginBottom:6,
+              background:b.paid?"rgba(255,255,255,0.02)":"rgba(255,255,255,0.03)",
+              border:"1px solid "+(b.paid?"rgba(255,255,255,0.04)":"rgba(255,255,255,0.08)"),
+              borderRadius:10,opacity:b.paid?0.55:1}}>
+              <div style=${{flex:1}}>
+                <div style=${{fontSize:13,fontWeight:500,
+                  textDecoration:b.paid?"line-through":"none",
+                  color:b.paid?"#475569":"#e2e8f0"}}>${b.name}</div>
+                <div style=${{fontSize:11,color:"#334155",marginTop:2}}>
+                  ${b.cat}${b.day?" · day "+b.day:" · variable"}
+                  ${b.auto && html`<span style=${{color:"#34d399",marginLeft:4}}>✓ auto</span>`}
+                  ${b.note && html`<span style=${{color:"#fbbf24",marginLeft:4}}>· ${b.note}</span>`}
+                </div>
+              </div>
+              <div style=${{display:"flex",alignItems:"center",gap:6,flexShrink:0,marginLeft:8}}>
+                <div style=${{textAlign:"right"}}>
+                  <div style=${{fontSize:14,fontWeight:600}}>${fmt(b.amt)}</div>
+                  ${!b.paid&&b.day && html`<div style=${{fontSize:11,color:d<=3?"#f87171":"#475569"}}>
+                    ${d===0?"today":"in "+d+"d"}</div>`}
+                </div>
+                <div style=${{display:"flex",flexDirection:"column",gap:4}}>
+                  <button onClick=${function(){tog(b.id);}} style=${{...bSt,
+                    color:b.paid?"#475569":"#34d399",
+                    borderColor:b.paid?"rgba(255,255,255,0.06)":"rgba(52,211,153,0.3)"}}>
+                    ${b.paid?"↩":"✓"}</button>
+                  <button onClick=${function(){setEid(b.id);}} style=${bSt}>···</button>
+                </div>
+              </div>
+            </div>`;
+      })}
+    </div>`;
+  }
 
-<section class="guarantee">
-  <div class="section-eyebrow" style="color:var(--gold);">Our Guarantee</div>
-  <h2 class="section-title" style="color:var(--navy);">We stand behind<br><em>every engagement.</em></h2>
-  <div class="guarantee-box">
-    <blockquote>"If you complete our Financial Clarity Audit and don't feel you received clear, actionable financial insight worth your investment — we will refund your payment in full. No questions asked."</blockquote>
-    <cite>— Andrew Kelley, Founder — Runway CFO</cite>
-  </div>
-</section>
+  function BillEdit({initial, onSave, onCancel, onDelete}) {
+    var [name,setName] = useState(initial?initial.name:"");
+    var [cat,setCat]   = useState(initial?initial.cat:"");
+    var [day,setDay]   = useState(initial&&initial.day?String(initial.day):"");
+    var [amt,setAmt]   = useState(initial?String(initial.amt):"");
+    var [auto,setAuto] = useState(initial?initial.auto:false);
+    var [note,setNote] = useState(initial?initial.note||"":"");
+    return html`<div style=${{background:"rgba(59,130,246,0.07)",border:"1px solid rgba(59,130,246,0.18)",
+      borderRadius:10,padding:"10px 12px",marginBottom:8}}>
+      <div style=${{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,marginBottom:6}}>
+        <input value=${name} onChange=${function(e){setName(e.target.value);}} placeholder="Bill name" style=${iSt}/>
+        <input value=${cat}  onChange=${function(e){setCat(e.target.value);}}  placeholder="Category"  style=${iSt}/>
+      </div>
+      <div style=${{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6,marginBottom:6}}>
+        <input value=${day} onChange=${function(e){setDay(e.target.value);}} placeholder="Day of month" type="number" style=${iSt}/>
+        <input value=${amt} onChange=${function(e){setAmt(e.target.value);}} placeholder="Amount $"     type="number" style=${iSt}/>
+      </div>
+      <input value=${note} onChange=${function(e){setNote(e.target.value);}} placeholder="Note (optional)"
+        style=${{...iSt,marginBottom:8}}/>
+      <label style=${{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"#94a3b8",marginBottom:10,cursor:"pointer"}}>
+        <input type="checkbox" checked=${auto} onChange=${function(e){setAuto(e.target.checked);}}/> Autopay
+      </label>
+      <div style=${{display:"flex",gap:6}}>
+        <button onClick=${function(){onSave(Object.assign({},initial||{},
+          {name,cat,day:parseInt(day)||null,amt:parseFloat(amt)||0,auto,note,paid:initial?initial.paid:false}));}}
+          style=${{...bSt,background:"rgba(52,211,153,0.15)",color:"#34d399",flex:1}}>Save</button>
+        <button onClick=${onCancel} style=${{...bSt,flex:1}}>Cancel</button>
+        ${onDelete && html`<button onClick=${onDelete}
+          style=${{...bSt,background:"rgba(239,68,68,0.12)",color:"#f87171"}}>Delete</button>`}
+      </div>
+    </div>`;
+  }
 
-<!-- CTA -->
+  // ── Debt Tab ──────────────────────────────────────────────────────────────────
+  function DebtTab({expD, setExpD}) {
+    var total  = DEBTS.reduce(function(s,d){return s+d.balance;},0);
+    var minPmt = DEBTS.reduce(function(s,d){return s+d.min;},0);
+    var sorted = DEBTS.slice().sort(function(a,b){return b.rate-a.rate;});
+    return html`<div>
+      <div style=${{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:12}}>
+        <${Crd} label="Total debt" value=${fmt(total)} color="#f87171" sub="all accounts"/>
+        <${Crd} label="Min payments" value=${fmt(minPmt)} color="#64748b" sub="/month"/>
+      </div>
+      <${Alrt} color="blue" msg="Tap any debt to expand · Update balances monthly"/>
+      <${Hdr} label="Attack order — highest rate first"/>
+      ${sorted.map(function(d,i){
+        var open = expD===d.name;
+        return html`<div key=${d.name} onClick=${function(){setExpD(open?null:d.name);}}
+          style=${{background:i===0?"rgba(239,68,68,0.09)":"rgba(255,255,255,0.03)",
+            border:"1px solid "+(i===0?"rgba(239,68,68,0.25)":"rgba(255,255,255,0.07)"),
+            borderRadius:10,padding:"11px 13px",marginBottom:7,cursor:"pointer"}}>
+          <div style=${{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <div style=${{display:"flex",alignItems:"center",gap:7}}>
+              ${i===0 && html`<span style=${{fontSize:9,background:"#ef4444",color:"#fff",
+                padding:"1px 6px",borderRadius:10,fontWeight:700}}>ATTACK</span>`}
+              <span style=${{fontSize:13,fontWeight:500}}>${d.name}</span>
+            </div>
+            <div style=${{textAlign:"right"}}>
+              <div style=${{fontSize:14,fontWeight:700}}>${fmt(d.balance)}</div>
+              <div style=${{fontSize:11,color:"#ef4444"}}>${d.rate}% APR</div>
+            </div>
+          </div>
+          ${open && html`<div style=${{marginTop:9,paddingTop:9,borderTop:"1px solid rgba(255,255,255,0.07)",
+            fontSize:12,color:"#94a3b8"}}>
+            ${[["Min payment",fmt(d.min)+"/mo"],
+               ["At min only","~"+Math.ceil(d.balance/d.min)+" months"],
+               ["Monthly interest",fmt(Math.round(d.balance*d.rate/100/12))]
+              ].map(function(kv){
+                return html`<div style=${{display:"flex",justifyContent:"space-between",marginBottom:4}}>
+                  <span>${kv[0]}</span>
+                  <span style=${{color:"#e2e8f0"}}>${kv[1]}</span>
+                </div>`;
+              })}
+          </div>`}
+        </div>`;
+      })}
+    </div>`;
+  }
 
-<section class="cta-section" id="contact">
-  <div class="section-eyebrow">Get Started</div>
-  <h2 class="section-title" style="max-width:600px; margin:0 auto;">
-    Stop guessing.<br><em>Start knowing.</em>
-  </h2>
-  <p class="section-body" style="text-align:center;">
-    Book a free 20-minute discovery call. We'll tell you exactly where you stand and whether we're the right fit. No pitch. No pressure.
-  </p>
-  <div class="cta-actions">
-    <a href="https://calendly.com/hello-runwaycfo/30min" target="_blank" class="btn-primary">Book a Discovery Call</a>
-    <span class="cta-divider">or</span>
-    <a href="mailto:hello@runwaycfo.ai" class="btn-secondary">Email us directly</a>
-  </div>
-  <p style="margin-top:2rem; font-size:0.8rem; color:var(--gray);">hello@runwaycfo.ai &nbsp;·&nbsp; Response within 24 hours</p>
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-  <div class="footer-logo">Runway <span>CFO</span></div>
-  <ul class="footer-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="mailto:hello@runwaycfo.ai">Contact</a></li>
-  </ul>
-  <p class="footer-copy">© 2026 Runway CFO LLC · hello@runwaycfo.ai</p>
-</footer>
-
+  // ── Mount ─────────────────────────────────────────────────────────────────────
+  var root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(React.createElement(App));
+})();
+</script>
 </body>
 </html>
